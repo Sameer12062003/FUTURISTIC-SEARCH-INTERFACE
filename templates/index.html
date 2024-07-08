@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Futuristic Search Interface</title>
+    <style>
+body {
+  background: radial-gradient(ellipse at bottom, #1B2735 0%, #191F24 100%);
+  color: #ffffff;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#stars-container {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+#stars, #stars2, #stars3 {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 2px;
+  width: 2px;
+  border-radius: 50%;
+  background: transparent;
+}
+
+#stars {
+  animation: animateStars 28.5s ease-in-out infinite;
+}
+
+#stars::after, #stars2::after, #stars3::after {
+  content: " ";
+  position: absolute;
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0;
+  margin: auto;
+  height: 1px;
+  width: 1px;
+  border-radius: 50%;
+  background: transparent;
+}
+
+#stars2 {
+  animation: animateStars 30s ease-in-out infinite;
+}
+
+#stars3 {
+  animation: animateStars 31.5s ease-in-out infinite;
+}
+
+@keyframes animateStars {
+  0% { transform: rotate3d(-1, 1, 0, 0deg); }
+  25% { transform: rotate3d(-1, 1, 0, 30deg); }
+  50% { transform: rotate3d(-1, 1, 0, 0deg); }
+  75% { transform: rotate3d(-1, 1, 0, -30deg); }
+  100% { transform: rotate3d(-1, 1, 0, 0deg); }
+}
+
+.container {
+    display: flex;
+    flex-grow: 1;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative; /* Added position relative for z-index */
+}
+
+.main-content {
+  position: relative;
+  padding: 20px;
+  width: 70%;
+  overflow-y: auto;
+  min-height: 500px;
+  background: radial-gradient(ellipse at bottom, #24303e 0%, #191F24 100%);
+  color: #ffffff;
+  z-index: 1; /* Ensure main-content is above stars-container */
+}
+
+#queryForm {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  position: relative; /* Added position relative for stacking */
+  z-index: 2; /* Ensure form is above stars-container */
+}
+
+input[type="text"] {
+  background-color: transparent;
+  color: white;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 15px 0 0 15px;
+  outline: none;
+  width: 850px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  border-radius: 0 15px 15px 0;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 20px rgba(13, 110, 253, 0.6);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+input[type="text"]:hover, input[type="text"]:focus {
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.sources {
+  background-color: rgba(28, 30, 36, 0.8); /* Slightly transparent background */
+    padding: 20px;
+    height: 90%;
+    width: 30%;
+    overflow-y: auto;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Minimal light-colored border */
+    box-shadow: 0 0 15px rgba(0, 0, 255, 0.3);
+    position: relative;
+    z-index: 3;
+}
+
+
+.sources::-webkit-scrollbar {
+    width: 5px;
+}
+
+.sources::-webkit-scrollbar-track {
+    background-color: rgba(28, 30, 36, 0.6);
+    border-radius: 10px;
+}
+
+.sources::-webkit-scrollbar-thumb {
+    background-color: rgba(90, 135, 160, 0.6);
+    border-radius: 10px;
+}
+
+.sources::-webkit-scrollbar-thumb:hover {
+    background: rgba(90, 135, 160, 0.8);
+}
+
+
+.sources strong {
+    color: #8ab9c1;
+    display: block;
+    margin-bottom: 10px;
+    font-size: 18px;
+    text-shadow: 0 0 5px rgba(138, 185, 193, 0.7);
+}
+
+.source-card {
+    background-color: rgba(22, 27, 34, 0.8);
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+    border-left: 5px solid #5a87a0;
+}
+
+.source-card:hover {
+    background-color: rgba(34, 40, 49, 0.9);
+    transform: translateX(10px);
+    box-shadow: 0 5px 15px rgba(90, 135, 160, 0.5);
+}
+
+.source-card a {
+    color: #b0e0e6;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+}
+
+.source-card a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+
+
+.loading-animation {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  /* background: rgba(0, 0, 0, 0.5); */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden; /* Hidden by default, shown during loading */
+}
+
+.star {
+  position: absolute;
+  height: 10px; /* Increased size */
+  width: 10px; /* Increased size */
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 0 8px white; /* Add glow effect */
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px white;
+  }
+  100% {
+    box-shadow: 0 0 15px white; /* Enhance glow effect */
+  }
+}
+
+#response {
+    visibility: hidden; /* Initially hidden */
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+}
+
+#response.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+#response {
+            background-color: rgba(28, 30, 36, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            box-shadow: 0 0 15px rgba(0, 100, 200, 0.4);
+            overflow: hidden;
+            position: relative;
+            color: #a9d2d8; /* Updated text color */
+        }
+
+#response::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(145deg, rgba(0, 100, 200, 0.1), rgba(200, 0, 200, 0.1)); /* More subdued gradient */
+    mix-blend-mode: screen;
+    border-radius: 10px;
+}
+
+.response-text {
+            color: #a9d2d8;
+            font-family: 'Arial', sans-serif; 
+            font-size: 16px; 
+        }
+
+
+        .modal {
+    display: none; 
+    position: fixed; 
+    z-index: 10; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #1B2735;
+    margin: 10% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    height: 80%;
+}
+
+.close {
+  color: #ffffff;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+    </style>
+</head>
+<body>
+  <div class="container">
+    <div class="sources" id="sourceList"><strong>Sources:</strong>
+    </div>
+
+  <!-- Modal for website preview -->
+<div id="websitePreviewModal" class="modal">
+  <div class="modal-content">
+      <span class="close">&times;</span>
+      <iframe id="websitePreviewIframe" src="" style="width: 100%; height: 100%; border: none;"></iframe>
+  </div>
+</div>
+
+
+    <!-- Inside your HTML body where main-content is defined -->
+    <div class="main-content">
+      <div id="stars-container">
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
+      </div>
+      <form id="queryForm">
+        <input type="text" name="query" placeholder="Ask me anything..." required>
+        <button type="submit">Ask</button>
+      </form>
+      <div id="response">
+        <div class="response-text">
+        </div>
+    </div>
+    
+    </div>
+
+    <div class="loading-animation" id="loadingAnimation">
+      <div class="star"></div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      function generateStarsCss(n, maxSize) {
+        let cssValue = '';
+        for (let i = 0; i < n; i++) {
+          cssValue += `${Math.random() * maxSize}px ${Math.random() * maxSize}px #FFF`;
+          if (i < n - 1) cssValue += ', ';
+        }
+        return cssValue;
+      }
+
+      document.getElementById('stars').style.boxShadow = generateStarsCss(700, 2000);
+      document.getElementById('stars2').style.boxShadow = generateStarsCss(200, 2000);
+      document.getElementById('stars3').style.boxShadow = generateStarsCss(100, 2000);
+
+      const queryForm = document.getElementById('queryForm');
+    const responseDiv = document.getElementById('response');
+    const sourceListDiv = document.getElementById('sourceList');
+    const mainContent = document.querySelector('.main-content');
+    let fastForward = false; 
+
+    function createStars() {
+        const stars = [];
+        for (let i = 0; i < 5; i++) {
+            let star = document.createElement('div');
+            star.className = 'star';
+            const maxX = mainContent.clientWidth - 20;
+            const maxY = mainContent.clientHeight - 20;
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+            star.style.left = `${randomX}px`;
+            star.style.top = `${randomY}px`;
+
+            mainContent.appendChild(star);
+            stars.push({ x: randomX + 5, y: randomY + 5 });
+        }
+        return stars;
+    }
+
+    function drawLines(stars) {
+        const canvas = document.createElement('canvas');
+        canvas.width = mainContent.clientWidth;
+        canvas.height = mainContent.clientHeight;
+        canvas.style.position = 'absolute';
+        canvas.style.left = '0';
+        canvas.style.top = '0';
+        canvas.style.pointerEvents = 'none';
+        mainContent.prepend(canvas);
+
+        const ctx = canvas.getContext('2d');
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 2;
+
+        let currentStarIndex = 0;
+        function animateLineDrawing() {
+            if (currentStarIndex < stars.length - 1) {
+                const startStar = stars[currentStarIndex];
+                const endStar = stars[currentStarIndex + 1];
+
+                let progress = 0;
+                const step = fastForward ? 0.05 : 0.002; // Accelerate drawing if fastForward is true
+
+                function drawStep() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    for (let j = 0; j < currentStarIndex; j++) {
+                        ctx.beginPath();
+                        ctx.moveTo(stars[j].x, stars[j].y);
+                        ctx.lineTo(stars[j + 1].x, stars[j + 1].y);
+                        ctx.stroke();
+                    }
+
+                    ctx.beginPath();
+                    ctx.moveTo(startStar.x, startStar.y);
+                    const currentEndX = startStar.x + (endStar.x - startStar.x) * progress;
+                    const currentEndY = startStar.y + (endStar.y - startStar.y) * progress;
+                    ctx.lineTo(currentEndX, currentEndY);
+                    ctx.stroke();
+
+                    progress += step;
+                    if (progress <= 1) {
+                        requestAnimationFrame(drawStep);
+                    } else {
+                        currentStarIndex++;
+                        animateLineDrawing();
+                    }
+                }
+
+                drawStep();
+            }
+        }
+
+        animateLineDrawing();
+    }
+
+    function clearStarsAndLines() {
+        mainContent.querySelectorAll('.star, canvas').forEach(element => element.remove());
+        fastForward = false; // Reset the flag when clearing
+    }
+
+    queryForm.onsubmit = (e) => {
+    e.preventDefault();
+    const queryInput = queryForm.querySelector('input[name="query"]');
+    const query = queryInput.value;
+
+    clearStarsAndLines(); 
+    const stars = createStars();
+    drawLines(stars);
+
+    fetch('/process_query', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ query: query })
+    })
+    .then(response => response.json())
+    .then(data => {
+        const responseTextDiv = document.querySelector('#response .response-text');
+        responseTextDiv.innerHTML = data.answer;
+        if (data.answer.trim() !== '') {
+            clearStarsAndLines(); 
+            responseDiv.classList.add('visible');
+        } else {
+            responseDiv.classList.remove('visible');
+        }
+
+        sourceListDiv.innerHTML = '<strong>Sources:</strong>';
+        data.urls.forEach(url => {
+            const sourceCard = document.createElement('div');
+            sourceCard.className = 'source-card';
+            const link = document.createElement('a');
+            link.href = url;
+            link.textContent = url;
+            link.target = '_blank';
+            sourceCard.appendChild(link);
+            sourceListDiv.appendChild(sourceCard);
+        });
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        clearStarsAndLines();
+        const responseTextDiv = document.querySelector('#response .response-text');
+        responseTextDiv.innerHTML = '<p>An error occurred while fetching the data. Please try again later.</p>';
+        responseDiv.classList.add('visible'); // Ensure the response div is visible to show the error
+    });
+};
+
+const modal = document.getElementById('websitePreviewModal');
+    const iframe = document.getElementById('websitePreviewIframe');
+    const close = document.getElementsByClassName('close')[0];
+
+    // Event delegation for dynamically added source cards
+    document.querySelector('.sources').addEventListener('click', function(event) {
+        const target = event.target;
+        if (target.tagName === 'A' && target.closest('.source-card')) {
+            event.preventDefault();
+            const url = target.getAttribute('href');
+            iframe.src = `/preview?url=${encodeURIComponent(url)}`;
+            modal.style.display = 'block';
+        }
+    });
+
+    close.onclick = function() {
+        modal.style.display = 'none';
+        iframe.src = ''; // Clear the iframe source
+    };
+
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+            iframe.src = ''; // Clear the iframe source
+        }
+    };
+});
+  </script>
+</body>
+</html>

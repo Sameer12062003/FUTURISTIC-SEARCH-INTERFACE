@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futuristic Search Interface</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url('https://source.unsplash.com/1920x1080/?blackhole') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 800px;
+	    top: 70px;
+            left: -150px;	
+            margin: 50px auto; 
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            text-align: center; 
+            position: relative;
+        }
+
+        h2 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+	    h2 {
+            font-size: 2em;
+            opacity: 0; 
+            animation: fadeIn 5s ease-in-out forwards; 
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0; 
+            }
+            to {
+                opacity: 1; 
+            }
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin: 0 10px;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+	    h1 {
+            text-align: center; 
+        }
+ 	    @keyframes slideIn {
+    	    from {
+      	    transform: translateY(-50px);
+      	    opacity: 0;
+    	}
+    	to {
+      	    transform: translateY(0);
+            opacity: 1;
+    	}
+  	}
+	h1 {
+    	    animation: slideIn 3s ease-out;
+ 	}
+*{
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+   transition: 0.5s;
+   font-family: "Century Gothic", sans-serif;
+}
+
+.navlist{
+   width: 100%;
+   position: fixed;
+   padding: 5px 10%;
+
+}
+.navlist ul{
+   display: flex;
+   list-style: none;
+}
+.navlist ul li:first-child{
+   flex: 1;
+   color: #ffffff;
+}
+.navlist ul li h4{
+   font-family: serif;
+}
+.navlist ul a{
+   display: block;
+   margin-left: 20px;
+   font-family: "Century Gothic", sans-serif;
+   font-size: 0.9rem;
+   color: white;
+   text-decoration: none;
+}
+.btn-top-right {
+   position: absolute;
+   top: 20px; 
+   right: 50px; 
+}
+    </style>
+</head>
+<body>
+   <nav class="navlist">
+      <ul>
+         <li><h1>Futuristic Search Interface</h1></li>
+         <li><a href="">Home</a></li>
+         <li><a href="">About</a></li>
+         <li><a href="\login3.html">Sign Up</a></li>
+         
+      </ul>
+   </nav>
+
+
+<div class="container">
+    <h2>Welcome to Our Futuristic Search Interface</h2>
+    <p>Discover and create custom versions of Futuristic Search Interface that combine instructions, extra knowledge, and any combination of skills.</p>
+    <a href="\index.html" class="btn">Try it Yourself</a>
+</div>
+
+</body>
+</html>
