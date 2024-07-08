@@ -8,7 +8,8 @@ This project is an AI-powered search engine that leverages advanced language mod
 - **Vector Database**: CHROMADB
 - **Search Engines**: TAVILY SEARCH, DUCKDUCKGO
 - **Efficient human language translation** : LANGCHAIN COMMUNINTY
-- **Technologies used** : Natural Language Processing , 
+- **Technologies used** : Natural Language Processing ,
+- **Frameworks / Libraries used**: Python, Flask , HTML , CSS 
 
 ## Features
 - **Advanced Text Embedding**: Utilizes NOMIC EMBED TEXT for generating high-quality text embeddings.
